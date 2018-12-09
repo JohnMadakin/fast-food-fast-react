@@ -38,3 +38,5 @@ node_modules
 #coverage reporter
 .nyc_output
 
+.vscode
+
