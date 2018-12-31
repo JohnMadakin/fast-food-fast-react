@@ -94,7 +94,7 @@ body {
   text-decoration: none;
 }
 .login{
-  background-image: url('../images/login1.png');
+  background-image: url('../assets/images/login1.png');
   background-repeat: no-repeat;
   background-position: left center;
   padding-left: 8px;
@@ -143,7 +143,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/login-background.jpg');  background-repeat: no-repeat;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/login-background.jpg');  background-repeat: no-repeat;
   background-position: center;
   margin-top: 5%;
 }
@@ -151,6 +151,7 @@ body {
   color: white;
   text-align:center;
 }
+
 .signup-register{
   background-image: linear-gradient(120deg, #f1a503a1 0%, #f1f50c 100%);
   color: #27282B;
@@ -236,7 +237,7 @@ label{
   margin: 0 0 12px 0;
 }
 .imgcontainer h1{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/login-background.jpg');  
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/login-background.jpg');  
   background-repeat: no-repeat;  
   background-position: center;
   padding: 2.5rem 0rem;
@@ -305,6 +306,10 @@ span.psw {
   text-decoration: underline;
 }
 
+.imageUrl{
+  margin-top: 10px;
+}
+
 .signup a, .submit,.cancelbtn, .cancel-btn  {
   color: white;
   font-weight: bold;
@@ -329,7 +334,7 @@ span.psw {
   outline: none;
 }
 .logout {
-  background-image: url('../images/logout.png');
+  background-image: url('../assets/images/logout.png');
   background-position: left center;
   background-repeat: no-repeat;
   padding-left: 15px;
@@ -349,7 +354,7 @@ span.psw {
 }
 .sticky {
   position: fixed;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/fastfood.jpeg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/fastfood.jpeg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -443,17 +448,17 @@ span.psw {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);
 }
 #sale-link{
-  background-image: url('../images/low-price.png');
+  background-image: url('../assets/images/low-price.png');
   background-repeat: no-repeat;
   background-position: 5px;
 }
 #rec-link{
-  background-image: url('../images/quality.png');
+  background-image: url('../assets/images/quality.png');
   background-repeat: no-repeat;
   background-position: 5px;
 }
 #fav-link{
-  background-image: url('../images/favourite.png');
+  background-image: url('../assets/images/favourite.png');
   background-repeat: no-repeat;
   background-position: 5px;
 }
@@ -474,7 +479,7 @@ span.psw {
   to {opacity: 1;}
 }
 .hero {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/fastfood.jpeg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/fastfood.jpeg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -526,7 +531,7 @@ span.psw {
 .search-food {
   width: 60%;
   padding: 20px 40px 20px 40px;
-  background-image: url('../images/search.png');
+  background-image: url('../assets/images/search.png');
   background-repeat: no-repeat;
   background-position: 97% center;
   background-size: 2.2em;
@@ -657,7 +662,7 @@ textarea:focus{
   cursor: pointer;
   text-align: center;
   padding: 1.5rem 2.5rem;
-  background-image: url('../images/white-cart.png');
+  background-image: url('../assets/images/white-cart.png');
   background-repeat: no-repeat;
   background-position: 15% 50%;
   background-color: rgb(245, 165, 16);
@@ -670,7 +675,7 @@ textarea:focus{
   color: whitesmoke;
   -webkit-transition: color 0.2s; 
   transition: color 200ms ease-out;
-  background-image: url('../images/shopping-cart-4.png');
+  background-image: url('../assets/images/shopping-cart-4.png');
   background-repeat: no-repeat;
   background-position: 15% 50%;
   opacity: 0.8;
@@ -737,10 +742,10 @@ textarea:focus{
   background-color: green;
   display: none;
 }
-.login-message, .signup-message{
-  display:none;
+.signup-message{
+  display:block;
   color: white;
-  background-color: green;
+  background-color: red;
   padding: 1.1rem 2.0rem;
   margin-bottom: 2.0rem;
 }
@@ -816,7 +821,7 @@ textarea:focus{
   font-size: 1.6rem;
   border-bottom: solid 2px #ccc;
   border-top: solid 2px #ccc;
-  background-image: url('../images/online-payment.png');
+  background-image: url('../assets/images/online-payment.png');
   background-repeat: no-repeat;
   background-position: left center;
 
@@ -839,7 +844,7 @@ textarea:focus{
 .plus{
   width: 16px;
   height: 16px;
-  background-image: url('../images/add.png');
+  background-image: url('../assets/images/add.png');
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer; 
@@ -847,7 +852,7 @@ textarea:focus{
 .delete {
   width: 16px;
   height: 16px;
-  background-image: url('../images/delete.png');
+  background-image: url('../assets/images/delete.png');
   background-repeat: no-repeat;
   background-position: center;
   margin-left: 19rem;
@@ -860,7 +865,7 @@ textarea:focus{
 .minus{
   width: 16px;
   height: 16px;
-  background-image: url('../images/minus.png');
+  background-image: url('../assets/images/minus.png');
   background-repeat: no-repeat;
   background-position: center; 
   cursor: pointer;
@@ -1017,25 +1022,25 @@ hr {
   width: 40%
 }
 .price {
-  background-image: url('../images/currency.png');
+  background-image: url('../assets/images/currency.png');
   background-repeat: no-repeat;
   background-position: left center;
 }
 
 .calorie {
-  background-image: url('../images/value.png');
+  background-image: url('../assets/images/value.png');
   background-repeat: no-repeat;
   background-position: left center;
 }
 
 .rating {
-  background-image: url('../images/rating.png');
+  background-image: url('../assets/images/rating.png');
   background-repeat: no-repeat;
   background-position: left center;
 }
 
 .ingredient {
-  background-image: url('../images/list.png');
+  background-image: url('../assets/images/list.png');
   background-repeat: no-repeat;
   background-position: left center;
 }
@@ -1046,7 +1051,7 @@ hr {
   padding-left: 2.0rem;
 }
 .delete-item{
-  background-image: url('../images/delete.png');
+  background-image: url('../assets/images/delete.png');
   background-repeat: no-repeat;
   width: 16px;
   height: 16px;
@@ -1061,19 +1066,19 @@ hr {
   height: 50%;
 }
 .food-item-cal{
-  background-image: url('../images/value.png');
+  background-image: url('../assets/images/value.png');
   background-repeat: no-repeat;
   background-position: 0% center;
   padding-left: 2.5rem;
 }
 .food-price{
-  background-image: url('../images/currency.png');
+  background-image: url('../assets/images/currency.png');
   background-repeat: no-repeat;
   background-position: 0% 40%;
   padding-left: 2.5rem;
 }
 .food-item-ing{
-  background-image: url('../images/list.png');
+  background-image: url('../assets/images/list.png');
   background-repeat: no-repeat;
   background-position: 0% center;
   padding-left: 2.5rem;
@@ -1136,7 +1141,7 @@ hr {
   padding: 0.5rem 0rem;
 }
 .admin-food-items ul {
-  list-style-image: url('../images/rec.png');
+  list-style-image: url('../assets/images/rec.png');
   /* padding-left: 0; */
 }
 .admin-food-items li{
@@ -1155,7 +1160,7 @@ hr {
   padding: 1.5rem 2.5rem;
   font-size: 1.6rem;
   text-align: right;
-  background-image: url('../images/arrow-point-to-right.png');
+  background-image: url('../assets/images/arrow-point-to-right.png');
   background-repeat: no-repeat;
   background-position: right center;
   cursor:pointer;
