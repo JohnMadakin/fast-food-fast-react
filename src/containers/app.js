@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import store from '../store';
 import Layout from '../components/layouts/Layout';
 import HomePage from './pages/HomePage';
 import SignUp from './pages/SignUp';
@@ -9,14 +10,17 @@ import SignUp from './pages/SignUp';
 class App extends Component {
     render() {
         return (
-          <div>
-            <Layout>
+        <Provider store={store}>
+          <BrowserRouter>
+          <Layout>
               <Switch>
                 <Route path='/' exact component={HomePage}/>
                 <Route path='/signup' component={SignUp}/>
               </Switch>
             </Layout>
-          </div>
+
+          </BrowserRouter>
+          </Provider>
         );
     }
 }

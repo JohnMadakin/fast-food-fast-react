@@ -1,11 +1,16 @@
-import React, {Component} from 'react';
+import React, {
+  Component
+} from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import * as actionCreators from '../../actions/authActions';
+
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   state = {
     validated: true,
     errorMessage: '',
@@ -21,7 +26,8 @@ export default class SignUp extends Component {
       phoneNo: '',
       deliveryAddress: '',
       imageUrl: ''
-    }
+    },
+    isLoggedIn: null,
   }
   validateStringLength = (string) => {
     if (string.length >= 6 && string.length <= 150) {
@@ -135,9 +141,17 @@ export default class SignUp extends Component {
 
     })
     .then((response => {
-      console.log(response);
-      console.log(response.data);
-
+      if(response.status === 201){
+        console.log(response.data.token);
+        localStorage.setItem('fastfoodtoken',response.data.token);
+        return this.setState({
+          isLoggedIn: true,
+        });
+        }
+      return this.setState({
+        errorMessage: Response.data.message,
+        isLoggedIn: false,
+      });
     }))
     .catch(error => {
       console.log(error.response.data);
@@ -223,7 +237,20 @@ export default class SignUp extends Component {
             </form>
           </div>
         </div>
+        {this.state.isLoggedIn === true ? <Redirect to="/"/> : null}
+        {this.state.isLoggedIn === false ? <Redirect to="/signup"/> : null}
+
       </main>
     );
   }
 }
+
+export const mapStateToProps = state => ({
+  ...state.signup,
+});
+
+export const
+  mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch);
+
+
+export default SignUp;
