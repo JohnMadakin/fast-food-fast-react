@@ -245,7 +245,13 @@ label{
   color: white;
 }
 
-
+.login-message{
+  padding: 1rem 1.5rem;
+  background-color: red;
+  margin-bottom: 1rem;
+  width: 24rem;
+  color: #fff;
+}
 .modal-container {
   padding: 16px;
 }
