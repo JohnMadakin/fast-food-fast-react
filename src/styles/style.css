@@ -600,7 +600,7 @@ textarea:focus{
   min-height: 50px;
   width:25%;
   position: absolute;
-  display: none;
+  display: block;
   background-color: white;
   top:8.5%;
   left:65%;

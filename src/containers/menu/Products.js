@@ -15,9 +15,11 @@ class Products extends Component {
 
     })
   }
-  handleClick = (value) => {
-
-    alert(value);
+  handleClick = (id, title, price) => {
+    let cart = [];
+    console.log('=====', title, price);
+    // localStorage.setItem('usercart', cart)
+    // alert(value);
   }
   render() {
     const menus = this.state.menu.map((menu,index) => {

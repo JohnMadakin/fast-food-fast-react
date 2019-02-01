@@ -20,7 +20,7 @@ const Product = (props) => {
         </div>
         <hr/>
         <p className="food-des">{props.description}</p>
-        <h1 className="order-now" data-price="2250" data-title="Bacon Cheeseburger" data-image-src="./images/bacon-chesseburger.jpg" onClick={()=> {props.clickMe(props.foodId)}}>add to cart</h1>
+        <h1 className="order-now" data-price="2250" data-title="Bacon Cheeseburger" data-image-src="./images/bacon-chesseburger.jpg" onClick={()=> {props.clickMe(props.foodId, props.title, props.price)}}>add to cart</h1>
       </div>
     </Aux>
   );
