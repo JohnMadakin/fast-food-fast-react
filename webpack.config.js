@@ -6,6 +6,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.join(__dirname, "/dist"),
+    publicPath: '/',
     filename: "index_bundle.js"
   },
   module: {
@@ -20,15 +21,25 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
-      }
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {},
+          },
+        ],
+      },
     ]
   },
     plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/index.html"
-    })
-  ]
-
-
-
+      new HtmlWebpackPlugin({
+        template: "./src/index.html"
+      })
+    ],
+    devServer: {
+      compress: true,
+      historyApiFallback: true,
+    },
 };
