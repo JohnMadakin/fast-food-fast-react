@@ -1,24 +1,77 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
+import Modal from '../Modal';
 import '../../styles/style.css';
 
 export default class Header extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleLoginModal= this.handleLoginModal.bind(this);
+    this.handleSignIn= this.handleSignIn.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
   state = {
     loginPanel: false,
+    errorMessage: null,
+    isLoggedIn: null,
+    loading: false,
   }
 
   handleLoginModal(){
-    console.log('-------------------------------');
     this.setState({
       loginPanel: true,
     });
+  }
+  closeModal(e){
+    e.preventDefault();
+    this.setState({
+      loginPanel: false,
+    });
 
+  }
+   handleSignIn (e, username, password){
+    e.preventDefault();
+    console.log('-----------------------------',username, password);
+    const url = 'https://edafe-fast-food-fast.herokuapp.com/api/v1/auth/login';
+    const userData = {
+      username,
+      password,
+    }
+      axios(
+        {
+        url,
+        method: 'POST',
+        data: 
+          userData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+  
+      })
+      .then((response)=>{
+        if(response.status === 200){
+          console.log(response.data.token);
+          localStorage.setItem('fastfoodtoken',response.data.token);
+          return this.setState({
+            isLoggedIn: true,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        return this.setState({
+          errorMessage: 'Invalid Username or Password',
+          isLoggedIn: false,
+        })
+      });
   }
 
   render(){
     return (
       <nav className="nav">
+      {this.state.isLoggedIn ? <Redirect to="/user" /> : null}
       <header className="header">
         <div className="header-content">
           <div className="logo-container">
@@ -28,7 +81,7 @@ export default class Header extends React.Component {
             <div className="cart"><img src="../../../src/assets/images/cart.png" alt="cart" height="24px" width="24px"/><span>My Food Cart</span></div>
             <div className="menu"><img src="../../../src/assets/images/menu1.png" alt="menu" height="32px" width="32px"/> </div>
             <nav className="nav">
-                <div className="login nav__item"><a className="login-modal">{this.props.user ? <span>logout</span> : <span><Link to="/login" onClick={handleLoginModal}>login</Link></span>}</a></div>
+    <div className="login nav__item"><p className="login-modal">{this.props.user ? <span>logout</span> : <span onClick={this.handleLoginModal}>login</span>}</p></div>
                 <div className="signup nav__item">{this.props.user ? <span>dashboard</span> : <span><Link to="/signup">signup</Link></span>}</div>
               </nav>
               <div className="shopping-cart-card">
@@ -42,34 +95,7 @@ export default class Header extends React.Component {
                   </div>
                 <button className="item-checkout" >Checkout</button>
               </div>
-              <div id="modal-id" className="modal">
-                  <span className="close" title="Close Modal">&times;</span>
-                  <form className="modal-content animate">
-                    <div className="imgcontainer">
-                      <h1>Login</h1>
-                    </div>
-                
-                    <div className="modal-container" style={{display:this.state.loginPanel ? 'block' : 'none'}}>
-                        <div className="login-spinner"></div>           
-                      <label className="login-message"></label>
-                      <label htmlFor="uname"><b>Username</b></label>
-                      <input id="uname" type="text" placeholder="Enter Username" name="uname" required/>
-                
-                      <label  htmlFor="psw"><b>Password</b></label>
-                      <input id="psw" type="password" placeholder="Enter Password" name="psw" required/>
-                
-                      <button className="submit" type="submit">Login</button>
-                      {/* <label>
-                        <input type="checkbox" checked="checked" name="remember"/> Remember me
-                      </label> */}
-                    </div>
-                
-                    <div className="modal-container" style={{backgroundColor: '#f1f1f'}}>
-                      <button type="button" className="cancelbtn">Cancel</button>
-                    
-                    </div>
-                  </form>
-                </div>
+              <Modal errorMessage={this.state.errorMessage} closeModal={(e) => this.closeModal(e)} loginPanel={this.state.loginPanel} signin={(e, uname, password) => this.handleSignIn(e,  uname, password)}/>
         </div>
   
   </header>
@@ -78,3 +104,4 @@ export default class Header extends React.Component {
     );
   }
 }
+
