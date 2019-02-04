@@ -6,18 +6,36 @@ import Product from '../../components/Products/Product';
 class Products extends Component {
   state = {
     menu: [],
+    cart: [],
   }
   componentDidMount(){
     axios.get('https://edafe-fast-food-fast.herokuapp.com/api/v1/menu')
     .then(res => {
-      console.log(res.data.menu)
       this.setState({ menu : res.data.menu});
-
     })
   }
-  handleClick = (value) => {
-
-    alert(value);
+  handleClick = (foodItem) => {
+    const order = {
+      itemid: foodItem.foodId,
+      itemTitle: foodItem.title,
+      itemPrice: foodItem.price,
+      itemurl: foodItem.imageUrl,
+      itemCost: foodItem.price,
+      quantity: 1,
+    }
+    // order.itemCost = order.quantity * order.itemPrice;
+    const found = this.state.cart.find((item) => item.itemid === foodItem.foodId);
+    if(found){
+      return null;
+    }
+    this.setState({
+      cart: [
+        ...this.state.cart,
+        order,
+      ]
+    }, () => {
+      localStorage.setItem('usercart',JSON.stringify(this.state.cart));
+    });
   }
   render() {
     const menus = this.state.menu.map((menu,index) => {
