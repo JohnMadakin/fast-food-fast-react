@@ -70,7 +70,6 @@ class SignUp extends Component {
     return true;
   };
 
-
   validateInputs = () => {
     const inputs = {...this.state.inputs};
     const validateData = Object.keys(inputs);

@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import Modal from '../Modal';
-import ShoppingCart from '../ShoppoingCart';
+import ShoppingCart from '../ShoppingCart';
 import '../../styles/style.css';
 import logo from '../../assets/images/logo.png';
 import cart from '../../assets/images/cart.png';
@@ -15,6 +15,8 @@ export default class Header extends React.Component {
     this.handleSignIn = this.handleSignIn.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.showCart = this.showCart.bind(this);
+    this.closeCart = this.closeCart.bind(this);
+
   }
   state = {
     loginPanel: false,
@@ -60,6 +62,7 @@ export default class Header extends React.Component {
           localStorage.setItem('fastfoodtoken',response.data.token);
           return this.setState({
             isLoggedIn: true,
+            loginPanel: false,
           });
         }
       })
@@ -72,11 +75,16 @@ export default class Header extends React.Component {
       });
   }
   showCart(){
-    console.log('===>', this.state.viewCart)
     this.setState({
       viewCart: !this.state.viewCart,
     });
   }
+  closeCart(){
+    this.setState({
+      viewCart: false,
+    });
+  }
+
 
   render(){
     return (
@@ -94,7 +102,7 @@ export default class Header extends React.Component {
     <div className="login nav__item"><p className="login-modal">{this.props.user ? <span>logout</span> : <span onClick={this.handleLoginModal}>login</span>}</p></div>
                 <div className="signup nav__item">{this.props.user ? <span>dashboard</span> : <span><Link to="/signup">signup</Link></span>}</div>
               </nav>
-              {this.state.viewCart ? <ShoppingCart /> : null}
+              {this.state.viewCart ? <ShoppingCart  closeCart={this.closeCart} /> : null}
               <Modal errorMessage={this.state.errorMessage} closeModal={(e) => this.closeModal(e)} loginPanel={this.state.loginPanel} signin={(e, uname, password) => this.handleSignIn(e,  uname, password)}/>
         </div>
   
