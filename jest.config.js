@@ -1,12 +1,12 @@
 module.exports = {
-  setupFiles: ['<rootDir>/setup/enzymeSetup.js'],
+  setupFiles: ['<rootDir>/src/setup/enzymeSetup.js'],
   transform: {
     '^.+\\.js$': 'babel-jest',
   },
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!src/index.js',
-    '!src/containers/App.js',
+    '!src/containers/app.js',
   ],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|svg)$':

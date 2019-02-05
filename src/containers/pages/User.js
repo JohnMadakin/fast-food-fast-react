@@ -5,10 +5,6 @@ import history from '../../history';
 
 
 class User extends React.Component {
-  constructor(props){
-    super(props);
-    this.handleSideNav = this.handleSideNav.bind(this);
-  }
   state = {
     orders: {},
     loading: true,
@@ -17,6 +13,9 @@ class User extends React.Component {
   }
   componentDidMount(){
     const { user } = this.props;
+    if(!user ){
+      return history.push('/');
+    }
     const url = `https://edafe-fast-food-fast.herokuapp.com/api/v1/users/${user.user.id}/orders`;
     axios(
       {
@@ -38,7 +37,7 @@ class User extends React.Component {
     });
 
   }
-  handleSideNav(tab){
+  handleSideNav = (tab) =>{
     if(tab === 'pending'){
       return this.setState({
         displayPending: true,
@@ -49,20 +48,15 @@ class User extends React.Component {
     });
 
   }
-  componentWillMount(){
-    const { user } = this.props;
-    !user ? this.props.history.push('/') : null
-  }
 
   render(){
     return (
       <div>
         <div className="admin-content">
           <div className="content-nav">
-            <p className="admin-nav-orders" data-nav="pending" onClick={()=> this.handleSideNav('pending')}>Pending Orders</p>
-            <p className="admin-nav-orders" data-nav="confirm" onClick={()=> this.handleSideNav('confirm')}>Delivered Orders</p>
+            <p className="admin-nav-orders" id="pending-nav" data-nav="pending" onClick={()=> this.handleSideNav('pending')}>Pending Orders</p>
+            <p className="admin-nav-orders" id="confirm-nav" data-nav="confirm" onClick={()=> this.handleSideNav('confirm')}>Delivered Orders</p>
             <div className="admin-content-food" id="confirm">
-
             </div>
           </div>
           <div className="admin-content-food" id="pending" style={{display: this.state.displayPending ? 'block' : 'none'}}>

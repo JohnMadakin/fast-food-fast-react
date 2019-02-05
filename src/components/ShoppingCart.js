@@ -4,33 +4,23 @@ import CartContainer from './CartContainer';
 import history from '../history';
 
 class ShoppingCart extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.handleQuantityChange = this.handleQuantityChange.bind(this);
-    this.checkOut = this.checkOut.bind(this);
-    this.removeItem = this.removeItem.bind(this);
-
-  }
   state = {
     user: '',
     order: JSON.parse(localStorage.getItem('usercart') || '[]'),
     subTotal: JSON.parse(localStorage.getItem('usercart') || '[]').reduce((a,b) => a+(b.itemPrice * b.quantity), 0) || 0,
   }
-  handleQuantityChange(e, price,index){
+  handleQuantityChange = (e, price,index) => {
     const order = [...this.state.order];
     order[index].quantity = parseInt(e.target.value);
     const subTotal = order.reduce((a,b) => a+(b.itemPrice * b.quantity), 0);
-    console.log('current order ',order);
     this.setState({
       order,
       subTotal,
     }, ()=>{
-      console.log('======> ',this.state.order);
       localStorage.setItem('usercart',JSON.stringify(this.state.order));
     });
   }
-  removeItem(item,price,qty){
+  removeItem = (item,price,qty) => {
     const order = [...this.state.order];
     order.splice(item, 1);
     const subTotal = this.state.subTotal - qty*price;
@@ -38,12 +28,11 @@ class ShoppingCart extends React.Component {
       order,
       subTotal,
     }, ()=>{
-      console.log('======> ',this.state.order);
       localStorage.setItem('usercart',JSON.stringify(this.state.order));
     });
 
   }
-  checkOut(){
+  checkOut = () => {
     const order = [...this.state.order];
     localStorage.setItem('userorder',JSON.stringify(order));
     this.props.closeCart();
