@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import CartItem from './CartItem';
 
 const CartContainer = (props) => {
-  console.log('------------------------> ',props.order)
   const Items = props.order
   .map((item, index) => <CartItem key={item.itemid} itemid={item.itemid} 
     itemTitle={item.itemTitle} 

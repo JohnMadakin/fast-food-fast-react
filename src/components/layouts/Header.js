@@ -7,6 +7,7 @@ import ShoppingCart from '../ShoppingCart';
 import '../../styles/style.css';
 import logo from '../../assets/images/logo.png';
 import cart from '../../assets/images/cart.png';
+import history from '../../history';
 
 export default class Header extends React.Component {
   constructor(props){
@@ -16,7 +17,7 @@ export default class Header extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.showCart = this.showCart.bind(this);
     this.closeCart = this.closeCart.bind(this);
-
+    this.handleLogoutModal = this.handleLogoutModal.bind(this);
   }
   state = {
     loginPanel: false,
@@ -24,6 +25,7 @@ export default class Header extends React.Component {
     isLoggedIn: null,
     loading: false,
     viewCart: false,
+    loggedOut: false,
   }
 
   handleLoginModal(){
@@ -63,6 +65,8 @@ export default class Header extends React.Component {
           return this.setState({
             isLoggedIn: true,
             loginPanel: false,
+          }, ()=> {
+            window.location.replace('/user');
           });
         }
       })
@@ -84,9 +88,19 @@ export default class Header extends React.Component {
       viewCart: false,
     });
   }
+  handleLogoutModal(){
+    console.log('i want to log out');
+    this.setState({
+      loggedOut: true,
+    }, ()=>{
+      localStorage.clear('fastfoodtoken');
+      window.location.replace('/');
+    });
+  }
 
 
   render(){
+    console.log('this.props.user', this.props.user);
     return (
       <nav className="nav">
       {this.state.isLoggedIn ? <Redirect to="/user" /> : null}
@@ -99,7 +113,7 @@ export default class Header extends React.Component {
             <div className="cart" onClick={this.showCart}><img src={cart} alt="cart" height="24px" width="24px"/><span>My Food Cart</span></div>
             <div className="menu"><img src="../../../src/assets/images/menu1.png" alt="menu" height="32px" width="32px"/> </div>
             <nav className="nav">
-    <div className="login nav__item"><p className="login-modal">{this.props.user ? <span>logout</span> : <span onClick={this.handleLoginModal}>login</span>}</p></div>
+    <div className="login nav__item"><p className="login-modal">{this.props.user || this.state.loggedOut ? <span className="header-login" onClick={this.handleLogoutModal}>Logout</span> : <span className="header-logout" onClick={this.handleLoginModal}>Login</span>}</p></div>
                 <div className="signup nav__item">{this.props.user ? <span>dashboard</span> : <span><Link to="/signup">signup</Link></span>}</div>
               </nav>
               {this.state.viewCart ? <ShoppingCart  closeCart={this.closeCart} /> : null}

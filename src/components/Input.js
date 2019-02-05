@@ -1,6 +1,4 @@
-import React from 'react';
-
-import Aux from '../hoc/Aux';
+import React, {Fragment} from 'react';
 
 const Input = (props) =>  {
   let inputElement = null;
@@ -13,9 +11,9 @@ const Input = (props) =>  {
     break;
   }
   return (
-    <Aux>
+    <Fragment>
       {inputElement}
-    </Aux>
+    </Fragment>
   )
 }
 
