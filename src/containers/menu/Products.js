@@ -17,7 +17,6 @@ class Products extends Component {
     })
   }
   closePopUp = () => {
-    console.log('something about you baby')
    this.setState({
       alreadyAdded: false,
     });
@@ -35,7 +34,6 @@ class Products extends Component {
     // order.itemCost = order.quantity * order.itemPrice;
     const found = this.state.cart.find((item) => item.itemid === foodItem.foodId);
     if(found){
-      console.log('-----you rock my world - -')
       return this.setState({
         alreadyAdded: true,
       });

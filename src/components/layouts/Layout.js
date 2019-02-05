@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 
@@ -7,12 +7,11 @@ import Aux from '../../hoc/Aux';
 
 
 const Layout = (props) => {
-  // const userinfo = decodeToken();
   return (
-    <Aux>
+    <Fragment>
       <Header user={props.user} />
      {props.children}
-   </Aux>
+   </Fragment>
   );
 };
 

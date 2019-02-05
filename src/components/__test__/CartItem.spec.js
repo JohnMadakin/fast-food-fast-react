@@ -58,8 +58,5 @@ describe('Cartitem Component', () => {
       changeQuantity: props.changeQuantity,
     });
     expect(props.changeQuantity).toHaveBeenCalled();
-
-    // wrapper.instance().changeQuantity(e, props.itemPrice, props.index);
   });
-  // onChange={(e)=> props.changeQuantity(e,props.itemPrice,props.index)
 });
