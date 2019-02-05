@@ -4,6 +4,7 @@ import axios from 'axios';
 import Items from '../../components/items';
 import Input from '../../components/Input';
 import history from '../../history';
+import PopUp from '../../components/PopUp';
 
 
 class Checkout extends React.Component{
@@ -14,6 +15,7 @@ class Checkout extends React.Component{
   }
   state = {
     deliveryAddress: '',
+    postedOrder: false,
   }
 
   handleDeliveryAddress(e){
@@ -23,22 +25,32 @@ class Checkout extends React.Component{
     })
   }
   componentWillMount(){
-    console.log('=======> history', history)
-    const {user} = history.location.state;
-    !user ? history.push('/') : null
+    console.log('------here ----', history)
+    const { user } = this.props;
+    console.log('------here ----2', user)
+
+    if(!user ){
+      console.log('------here ----3')
+      return history.push('/signup');
+    }
+    console.log('------here ----4')
+
+  }
+  
+  componentDidMount(){
+    console.log('------here ----2-------', history)
+
   }
 
   placeOrder(){
     const url = 'https://edafe-fast-food-fast.herokuapp.com/api/v1/orders';
-    const { order }= this.props.history.location.state;
+    const { order }= history.location.state;
     const orders = [...order];
     const token = history.location.state.user;
-    console.log('-------------> ', orders);
-    const postOrder = order.map(items => {
+    const postOrder = orders.map(items => {
       const {itemCost, itemPrice, itemTitle, itemurl, ...selectedItems} = items;
       return selectedItems;
     })
-    console.log('++++++++++++',postOrder);
     const userData = {
       orders:[
         ...postOrder,
@@ -47,8 +59,6 @@ class Checkout extends React.Component{
       payment: 'payondelivery',
       deliveryAddress: this.state.deliveryAddress,
     }
-    console.log('------------->  user data', userData);
-
     axios(
       {
       url,
@@ -62,6 +72,11 @@ class Checkout extends React.Component{
     })
     .then((response)=>{
       console.log(response.data);
+      this.setState({
+        postedOrder: true,
+      }, ()=>{
+        localStorage.clear('userorder');
+      });
     })
     .catch((error)=>{
       console.log(error.response)
@@ -70,20 +85,24 @@ class Checkout extends React.Component{
   }
 
   render(){
-    const { order }= this.props.history.location.state;
-    console.log('---> props',this.props)
+    const { order }= history.location.state;
+    const message = {
+      title: 'Hi Customer! This is your Attendant',
+      body: 'Your Order have been posted',
+      footer: 'ok',
+    }
     const subTotal = order.reduce((a,b)=> a+(b.quantity * b.itemPrice), 0);
 
     return(
       <main className="content-food">
-      
+      {this.state.postedOrder ? <PopUp message={message}/> : null}
       <div className="checkout-container">
         <div className="checkout-shopping-cart">
             <h1 className="cart-title checkout-cart-title">Food Items</h1>
-            <h3 className="waiting">Please be patient, Placing other</h3>
+            <h3 className="waiting">Please be patient, Placing order</h3>
             <div className="all-items">
-                <Items order={this.props.history.location.state.order} />
-                <Input inputtype="text" onChange={this.handleDeliveryAddress}/>
+                <Items order={history.location.state.order} />
+                <Input inputtype="text" className="email" placeholder="Enter Delivery Address" onChange={this.handleDeliveryAddress}/>
             </div>
         </div>
         <div className="item-recipt-container">

@@ -1,22 +1,24 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import Item from './Item';
+
 
 const Order = (props) => {
-  console.log('=========> items ', props.orders.ordersItem)
-  //ordersItem[index].title, ordersItem[index].quantity, ordersItem[index].imageurl, ordersItem[index].price, orderInfo[index].paymentmethod, orderInfo[index].orderstatus, orderInfo[index].total, orderInfo[index].deliveryaddress, orderInfo[index].date_created 
   const orderInfo = [...props.orders.ordersInfo];
   const Items = props.orders.ordersItem.map((item,index) => {
-    return (<tr key={`${item.title}${index}`}><td className="admin-food-item">{item.title}</td>
-    <td><span className="admin-order-qty">{item.quantity}</span></td>
-    <td>{item.imageurl}</td>
-    <td>{item.price}</td>
-    <td>{orderInfo[index].total}</td>
-    <td>{orderInfo[index].deliveryaddress}</td>
-    <td>{orderInfo[index].date_created }</td>
-
-    </tr>)
+    const orderDate = new Date(orderInfo[index].date_created).
+    toLocaleString('en-us', {day: '2-digit',  month: '2-digit', year: 'numeric' }).
+    replace(/(\d+)\/(\d+)\/(\d+)/, '$2-$1-$3');
+  
+    return (
+      <Fragment key={index*Math.random()}>
+      <tr><td>Order {index+1}</td><td>{orderDate}</td></tr>
+        <Item orders={item} index={index} orderInfo={orderInfo} key={index*Math.random()} />
+        <tr><td></td><td></td><td></td><td>Total:</td><td>N{orderInfo[index].total.toFixed(2)}</td></tr>
+      </Fragment>
+    )
   });
   return (
-    <table>
+    <table className="user-orders">
       <tbody>
         {Items}
     </tbody>

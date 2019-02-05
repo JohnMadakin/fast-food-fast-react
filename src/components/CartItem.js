@@ -1,7 +1,6 @@
 import React from 'react';
 
 const CartItem = (props) => {
-  console.log('item cost ===> ',props.itemCost, props.itemPrice, props.itemQuantity);
 return (
   <div className="item">
     <img className="cart-image" src={`${props.itemUrl}`} />

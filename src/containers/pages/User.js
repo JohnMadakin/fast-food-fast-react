@@ -17,6 +17,10 @@ class User extends React.Component {
   }
   componentDidMount(){
     const { user } = this.props;
+    console.log('user => ', user)
+    if(!user ){
+      return history.push('/');
+    }
     const url = `https://edafe-fast-food-fast.herokuapp.com/api/v1/users/${user.user.id}/orders`;
     axios(
       {
@@ -49,10 +53,15 @@ class User extends React.Component {
     });
 
   }
-  componentWillMount(){
-    const { user } = this.props;
-    !user ? this.props.history.push('/') : null
-  }
+  // componentWillMount(){
+  //   const { user } = this.props;
+  //   if(!user ){
+  //     return history.push('/signup');
+  //   }
+  // }
+  // shouldComponentUpdate(){
+  //   console.log('--i reach component should update');
+  // }
 
   render(){
     return (
