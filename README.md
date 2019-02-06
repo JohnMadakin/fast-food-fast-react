@@ -1,9 +1,42 @@
 [![Build Status](https://travis-ci.org/JohnMadakin/fast-food-fast-react.svg?branch=develop)](https://travis-ci.org/JohnMadakin/fast-food-fast-react)
+
 [![Coverage Status](https://coveralls.io/repos/github/JohnMadakin/fast-food-fast-react/badge.svg?branch=develop)](https://coveralls.io/github/JohnMadakin/fast-food-fast-react?branch=develop)
 
-# Introduction
-
 Fast-Food-Fast​ is a food delivery service web app for a restaurant.
+=======
+
+## Vision
+Our Aim is to provide fast food available to all part of Nigeria
+
+---
+
+## File Structure
+
+-- .github
+-- __mocks__
+---|
+   |-- index.html
+-- src
+---|
+   --- actions
+   --- assets
+   --- components
+   --- helpers
+   --- containers
+   --- reducers
+   --- setup
+   - index.js
+-- .babelrc
+-- .coveralls.yml
+-- .gitignore
+-- .travis.yml
+-- app.json
+-- package.json
+-- README.md
+-- server.js
+-- jest.config.js
+
+
 
 ## Table of Content
  -features of the application
