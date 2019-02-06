@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Cartitem from '../Cartitem';
+import Cartitem from '../CartItem';
 
 
 describe('Cartitem Component', () => {
