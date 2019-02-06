@@ -7,11 +7,10 @@
     "start:dev": " webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "postinstall": "npm run build",
-    "serve": "node server.js",
-    "start": "npm run serve",
+    "start": "npm build && node server.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+    "coverage": "npm test && cat ./coverage/lcov.info"
   },
   "keywords": [],
   "author": "",
