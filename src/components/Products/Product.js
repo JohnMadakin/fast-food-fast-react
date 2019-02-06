@@ -1,5 +1,4 @@
-import React from 'react';
-import Aux from '../../hoc/Aux';
+import React, {Fragment} from 'react';
 
 const Product = (props) => {
   const food = {
@@ -9,7 +8,7 @@ const Product = (props) => {
     imageUrl: props.imageUrl
   };
   return (
-    <Aux>
+    <Fragment>
       <div className="card">
         <h1 className="food-title">{props.title}</h1>
         <div className="space"></div>
@@ -28,7 +27,7 @@ const Product = (props) => {
         <p className="food-des">{props.description}</p>
         <h1 className="order-now" onClick={()=> {props.clickMe(food)}}>add to cart</h1>
       </div>
-    </Aux>
+    </Fragment>
   );
 }
 

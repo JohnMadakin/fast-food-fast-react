@@ -17,13 +17,11 @@ const HomePage = (props) => (
 
           </div>          
         <div className="tab-content-container">
-            {/* <div className="spinner"></div> */}
             <Products/>           
         </div>
       </div>
             
   </div>
-  
 </main>
 );
 

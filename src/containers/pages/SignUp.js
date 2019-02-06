@@ -141,7 +141,6 @@ class SignUp extends Component {
     })
     .then((response => {
       if(response.status === 201){
-        console.log(response.data.token);
         localStorage.setItem('fastfoodtoken',response.data.token);
         return this.setState({
           isLoggedIn: true,
@@ -157,7 +156,7 @@ class SignUp extends Component {
     })
   }
 
-  checkPasswords = (evt) => {
+  checkPasswords = (event) => {
     if(event.target.name === 'password' || event.target.name === 'confirmPassword'){
       this.setState({passwordMismatchError: true});
     }
@@ -173,7 +172,6 @@ class SignUp extends Component {
   }
 
   uploadImage = (event) => {
-    console.log(event.target.files[0])
     const url = 'https://api.cloudinary.com/v1_1/fast-food-fast/upload';
     const preset = 'usersprofileimages';
     const imageUrl = event.target.files[0];
@@ -217,11 +215,11 @@ class SignUp extends Component {
               <div className="signup-form-container">
                   <label>Upload profile Image</label>
                   <Input  inputtype={"text"} inputtype={"text"}  className={"imageUrl"} type={"file"} name={"imageUrl"} onChange={this.uploadImage} accept={"image/*"}/><br/>
-                  <Input  inputtype={"text"} type={"text"} placeholder={"Enter username"} name={"username"} className={"email signup-form"} onChange={this.handleInputChange} required /><br/>
+                  <Input  inputtype={"text"} type={"text"} id={"username-signup"} placeholder={"Enter username"} name={"username"} className={"email signup-form"} onChange={this.handleInputChange} required /><br/>
                 <div className="name-group">
                   <Input  inputtype={"text"} type="text" placeholder="Enter Firstname" name="firstname" className={"firstname signup-form"} onChange={this.handleInputChange} required />
                   <Input inputtype={"text"} type="text" placeholder="Enter Lastname" name="lastname" className={"lastname signup-form"} onChange={this.handleInputChange} required /></div>
-                <Input  inputtype={"text"} type="email" placeholder="Enter Your Email" name="email" className={"email signup-form"} onChange={this.handleInputChange} required />
+                <Input  inputtype={"text"} id={"email-signup"}  type="email" placeholder="Enter Your Email" name="email" className={"email signup-form"} onChange={this.handleInputChange} required />
                 <div className="pwd-group">
                 <Input  inputtype={"text"} type={"password"} placeholder={"Enter Password"} className="pwd" name={"password" }id={"pwd"} onBlur={this.checkPasswords} onChange={this.handleInputChange} required={true} />
                   <Input  inputtype={"text"} type={"password"} placeholder={"Confirm Password"} name={"confirmPassword"} id={"confirmpwd"} onBlur={this.checkPasswords} onChange={this.handleInputChange} className={"pwd"} required={true}/>
@@ -230,7 +228,6 @@ class SignUp extends Component {
                 <label className="checkPasswords" style={{display: this.state.passwordMismatchError ? 'block' : 'none'}}>passwords do not match</label>
                 <Input  inputtype={"text"} type={"text"} placeholder={"Enter Phone Number"} name={"phoneNo"} className={"phone-no signup-form"} onChange={this.handleInputChange} required />
                 <Input  inputtype={"text"} type={"text"} placeholder={"Enter Delivery Address"} name={"deliveryAddress"} className={"delivery-address"} onChange={this.handleInputChange} required />
-              
                 <button type="submit" className="signup-submit" onClick={this.registerUser} >Sign Up</button>
               </div>
             </form>
@@ -243,13 +240,5 @@ class SignUp extends Component {
     );
   }
 }
-
-export const mapStateToProps = state => ({
-  ...state.signup,
-});
-
-export const
-  mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch);
-
 
 export default SignUp;

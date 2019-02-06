@@ -5,10 +5,6 @@ import history from '../../history';
 
 
 class User extends React.Component {
-  constructor(props){
-    super(props);
-    this.handleSideNav = this.handleSideNav.bind(this);
-  }
   state = {
     orders: {},
     loading: true,
@@ -17,7 +13,6 @@ class User extends React.Component {
   }
   componentDidMount(){
     const { user } = this.props;
-    console.log('user => ', user)
     if(!user ){
       return history.push('/');
     }
@@ -42,7 +37,7 @@ class User extends React.Component {
     });
 
   }
-  handleSideNav(tab){
+  handleSideNav = (tab) =>{
     if(tab === 'pending'){
       return this.setState({
         displayPending: true,
@@ -53,25 +48,15 @@ class User extends React.Component {
     });
 
   }
-  // componentWillMount(){
-  //   const { user } = this.props;
-  //   if(!user ){
-  //     return history.push('/signup');
-  //   }
-  // }
-  // shouldComponentUpdate(){
-  //   console.log('--i reach component should update');
-  // }
 
   render(){
     return (
       <div>
         <div className="admin-content">
           <div className="content-nav">
-            <p className="admin-nav-orders" data-nav="pending" onClick={()=> this.handleSideNav('pending')}>Pending Orders</p>
-            <p className="admin-nav-orders" data-nav="confirm" onClick={()=> this.handleSideNav('confirm')}>Delivered Orders</p>
+            <p className="admin-nav-orders" id="pending-nav" data-nav="pending" onClick={()=> this.handleSideNav('pending')}>Pending Orders</p>
+            <p className="admin-nav-orders" id="confirm-nav" data-nav="confirm" onClick={()=> this.handleSideNav('confirm')}>Delivered Orders</p>
             <div className="admin-content-food" id="confirm">
-
             </div>
           </div>
           <div className="admin-content-food" id="pending" style={{display: this.state.displayPending ? 'block' : 'none'}}>

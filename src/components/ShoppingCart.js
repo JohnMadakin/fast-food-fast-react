@@ -13,7 +13,6 @@ class ShoppingCart extends React.Component {
     const order = [...this.state.order];
     order[index].quantity = parseInt(e.target.value);
     const subTotal = order.reduce((a,b) => a+(b.itemPrice * b.quantity), 0);
-    console.log('current order ',order);
     this.setState({
       order,
       subTotal,
@@ -29,7 +28,6 @@ class ShoppingCart extends React.Component {
       order,
       subTotal,
     }, ()=>{
-      console.log('======> ',this.state.order);
       localStorage.setItem('usercart',JSON.stringify(this.state.order));
     });
 
