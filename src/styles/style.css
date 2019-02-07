@@ -166,6 +166,15 @@ body {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
+.checkout-delivery-address{
+  width: 60%;
+  padding: 12px 20px;
+  margin: 1.5rem 1.5rem;
+  display: block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+ 
+}
 
 .signup-container, .signup-form-container{
       width:100%;
@@ -668,10 +677,10 @@ textarea:focus{
 }
 
 .order-now {
-  margin: 1rem 4rem;
+  margin: 1rem 10rem;
   cursor: pointer;
   text-align: center;
-  padding: 1.5rem 2.5rem;
+  padding: 1rem 1rem;
   background-image: url('../assets/images/white-cart.png');
   background-repeat: no-repeat;
   background-position: 15% 50%;
@@ -786,7 +795,7 @@ textarea:focus{
   flex-wrap: wrap;
   padding: 1.0rem 0rem;
   width: 50%;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 .item-qty{
   font-size: 1.3rem;
@@ -814,7 +823,9 @@ textarea:focus{
 }
 .qty-checkout{
   color: #27282B;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  margin-left: 70%;
+  font-weight: bold;
 }
 .total-price{
   background:linear-gradient(120deg, #f1a503a1 0%, #f1f50c 100%);
@@ -873,6 +884,50 @@ textarea:focus{
   margin-left: 19rem;
   cursor: pointer;
  }
+ #dashboard{
+  background-color: transparent;
+  box-shadow: 0;
+ }
+ .dahboard-message{
+   text-align: center;
+   font-size: 2.4rem;
+   margin-left: 10%;
+ }
+ .dashboard-name{
+  text-transform:capitalize;
+ }
+ [data-badge]:after {
+  background: red;
+  border-radius: 30px;
+  color: #fff;
+  content: attr(data-badge);
+  font-size: 11px;
+  margin-top: -10px;
+  min-width: 20px;
+  padding: 2px;
+  position: absolute;
+  text-align: center;
+}
+
+[data-badge^="-"]:after,
+[data-badge="0"]:after,
+[data-badge=""]:after {
+  display: none;
+}
+ .items-number{
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background-color: orange;
+   color: #fff;
+   text-align: center;
+   padding: 0 auto;
+   padding-top: 2px;
+   position: relative;
+   bottom: 10px;
+   left: 10px;
+   z-index: 20;
+ }
  .checkout-delete{
   margin-left: 2rem;
   padding: 3.5rem 0rem;
@@ -902,7 +957,7 @@ textarea:focus{
   font-size: 1.5rem;
   font-weight: bold;
   margin: 5px 5px;
-  width: 7rem;
+  width: 15rem;
 }
 .checkout-item-title {
   padding: 1.5rem 1.5rem;
@@ -1348,7 +1403,7 @@ th {
     width: 100vw;
   }
   .order-now{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
   .food-des{
     font-size: 1.2rem;
@@ -1367,7 +1422,7 @@ th {
     width: 100vw;
   }
   .order-now{
-    font-size: 1.6rem;
+    font-size: 1.3rem;
   }
   .shopping-cart-card{
     left: 46%;
@@ -1419,7 +1474,7 @@ th {
 }
 .order-now{
   background-position: 5% 50%;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
 }
   
 }
@@ -1541,7 +1596,7 @@ th {
     font-size: 1.5rem;
   }
   .order-now{
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   .signup-container{
     width: 95%;
@@ -1818,6 +1873,10 @@ textarea{
     transform: translate(-120%, 0);
     transition: transform 0.3s ease;
   }
+  .order-now{
+    font-size: 1.4rem;
+    padding-left: 2rem;
+  }
   .nav.open {
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
@@ -1905,7 +1964,7 @@ textarea{
     width: 95%;
   }
   .order-now{
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     background-position: 10% 50%;
   }
  .sub, .tax, .total{

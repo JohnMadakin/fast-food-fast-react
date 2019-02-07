@@ -25,7 +25,7 @@ const Product = (props) => {
         </div>
         <hr/>
         <p className="food-des">{props.description}</p>
-        <h1 className="order-now" onClick={()=> {props.clickMe(food)}}>add to cart</h1>
+        <h1 className="order-now" id={props.foodId} onClick={()=> props.clickMe(food)}>add to cart</h1>
       </div>
     </Fragment>
   );

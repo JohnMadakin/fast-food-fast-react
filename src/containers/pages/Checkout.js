@@ -1,10 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withToastManager } from 'react-toast-notifications';
+
 
 import Items from '../../components/items';
 import Input from '../../components/Input';
-import history from '../../history';
-import PopUp from '../../components/PopUp';
+import postOrders from '../../actions/postOrders';
+
 
 
 class Checkout extends React.Component{
@@ -22,57 +26,41 @@ class Checkout extends React.Component{
       deliveryAddress: address,
     })
   }
-  componentWillMount(){
-    const { user } = this.props;
-    if(!user ){
-      return window.location.replace('/signup');
-    }
-
-  }
   
   componentDidMount(){
+    const { user } = this.props;
+    if(!user ){
+      // this.history.push("/signup");
+      return window.location.replace('/signup');
+    }
     this.setState({
       order: [...JSON.parse(localStorage.getItem('userorder') || '[]')],
     });
   }
 
-  placeOrder = () => {
-    const url = 'https://edafe-fast-food-fast.herokuapp.com/api/v1/orders';
-    const orders = [...this.state.order];
-    const token = history.location.state.user;
-    const postOrder = orders.map(items => {
-      const {itemCost, itemPrice, itemTitle, itemurl, ...selectedItems} = items;
-      return selectedItems;
-    })
-    const userData = {
-      orders:[
-        ...postOrder,
-      ],
-      status: "pending",
-      payment: 'payondelivery',
-      deliveryAddress: this.state.deliveryAddress,
-    }
-    axios(
-      {
-      url,
-      method: 'POST',
-      data: 
-        JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth": token,
-      },
-    })
-    .then((response)=>{
-      this.setState({
-        postedOrder: true,
-      }, ()=>{
-        localStorage.clear('userorder');
+  shouldComponentUpdate(nextProps) {
+    if (this.props.errorOccured !== nextProps.errorOccured && nextProps.errorOccured === true) {
+      this.props.toastManager.add(`${nextProps.errorMessage.data.message}`, {
+        appearance: 'error',
+        autoDismiss: true,
       });
-    })
-    .catch((error)=>{
-      console.log(error.response)
-    })
+      return false;
+    }
+    if (this.props.orderPostSuccess !== nextProps.orderPostSuccess && nextProps.orderPostSuccess === true) {
+      this.props.toastManager.add('You have Successfully Placed your Order', {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      localStorage.clear('userorder');
+      return true;
+    }
+
+    return true;
+  }
+
+  placeOrder = () => {
+    const orders = [...this.state.order];
+    this.props.postOrder(this.props.user.token, orders, this.state.deliveryAddress);
 
   }
 
@@ -84,24 +72,20 @@ class Checkout extends React.Component{
 
 
   render(){
-    // const { order }= history.location.state;
-    const message = {
-      title: 'Hi Customer! This is your Attendant',
-      body: 'Your Order have been posted',
-      footer: 'ok',
-    }
+    const numberOfItems = JSON.parse(localStorage.getItem('userorder') || "[]").length;
     const subTotal = this.state.order.reduce((a,b)=> a+(b.quantity * b.itemPrice), 0);
     return(
       <main className="content-food">
-      {this.state.postedOrder ? <PopUp message={message}/> : null}
       <div className="checkout-container">
         <div className="checkout-shopping-cart">
             <h1 className="cart-title checkout-cart-title">Food Items</h1>
-            <h3 className="waiting">Please be patient, Placing order</h3>
+            {numberOfItems=== 0 ? <h2 className="dahboard-message">Your Cart is Empty</h2> :             
             <div className="all-items">
                 <Items order={this.state.order} />
-                <Input inputtype="text" className="email" placeholder="Enter Delivery Address" onChange={this.handleDeliveryAddress}/>
+                <Input inputtype="text" className="checkout-delivery-address" placeholder="Enter Delivery Address" onChange={this.handleDeliveryAddress}/>
             </div>
+}
+
         </div>
         <div className="item-recipt-container">
           <div className="item-recipt">
@@ -111,6 +95,7 @@ class Checkout extends React.Component{
           </div>
           <div className="payment-group">
               <p className="pay">Payment method: <span className="payment-on-delivery">Payment on delivery</span></p>
+              {this.props.isPostingOrder ? <div className="spinner"></div> : null}           
               <button className="item-checkout" onClick={this.placeOrder} >Place Order</button>
           </div>
         </div>
@@ -124,4 +109,20 @@ class Checkout extends React.Component{
   }
 }
 
-export default Checkout;
+export const mapStateToProps = state => ({
+  ...state.getAllMenuReducer,
+  ...state.postOrderReducer
+});
+
+export const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    ...postOrders,
+  },
+  dispatch
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withToastManager(Checkout));
+
