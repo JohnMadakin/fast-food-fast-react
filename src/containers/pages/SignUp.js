@@ -4,13 +4,14 @@ import React, {
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import * as actionCreators from '../../actions/authActions';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withToastManager } from 'react-toast-notifications';
 
 import Input from '../../components/Input';
-import Button from '../../components/Button';
 
 
-class SignUp extends Component {
+export class SignUp extends Component {
   state = {
     validated: true,
     errorMessage: '',
@@ -115,45 +116,24 @@ class SignUp extends Component {
     return true;
   }
 
+  shouldComponentUpdate(nextProps){
+    if(this.props.error !== nextProps.error && nextProps.error === true){
+      this.props.toastManager.add(`${nextProps.errorMessage}`, {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+      return false;
+    }
+    return true;
+  }
+
   registerUser = (event) => {
     event.preventDefault();
-    const url = 'https://edafe-fast-food-fast.herokuapp.com/api/v1/auth/signup';
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      }
-    }
-    const userData = {...this.state.inputs};
-    delete userData.confirmPassword;
+    const { confirmPassword, ...userData} = this.state.inputs;
     if(this.validateInputs() !== true){
       return this.setState({validated: false})
     }
-    axios(
-      {
-      url,
-      method: 'POST',
-      data: 
-        userData,
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-    })
-    .then((response => {
-      if(response.status === 201){
-        localStorage.setItem('fastfoodtoken',response.data.token);
-        return this.setState({
-          isLoggedIn: true,
-        });
-        }
-      return this.setState({
-        errorMessage: Response.data.message,
-        isLoggedIn: false,
-      });
-    }))
-    .catch(error => {
-      console.log(error.response.data);
-    })
+    this.props.signUpUser(userData, this.props.history)
   }
 
   checkPasswords = (event) => {
@@ -228,6 +208,7 @@ class SignUp extends Component {
                 <label className="checkPasswords" style={{display: this.state.passwordMismatchError ? 'block' : 'none'}}>passwords do not match</label>
                 <Input  inputtype={"text"} type={"text"} placeholder={"Enter Phone Number"} name={"phoneNo"} className={"phone-no signup-form"} onChange={this.handleInputChange} required />
                 <Input  inputtype={"text"} type={"text"} placeholder={"Enter Delivery Address"} name={"deliveryAddress"} className={"delivery-address"} onChange={this.handleInputChange} required />
+                {this.props.isLoading ?  <div className="login-spinner"></div>   : null}
                 <button type="submit" className="signup-submit" onClick={this.registerUser} >Sign Up</button>
               </div>
             </form>
@@ -241,4 +222,18 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export const mapStateToProps = state => ({
+  ...state.signUpReducer,
+});
+
+export const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    ...actionCreators,
+  },
+  dispatch
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withToastManager(SignUp));

@@ -1,7 +1,6 @@
 import React from 'react';
  
 import CartContainer from './CartContainer';
-import history from '../history';
 
 class ShoppingCart extends React.Component {
   state = {
@@ -36,13 +35,7 @@ class ShoppingCart extends React.Component {
     const order = [...this.state.order];
     localStorage.setItem('userorder',JSON.stringify(order));
     this.props.closeCart();
-    history.push({
-      pathname: '/checkout',
-      state: {
-        order,
-        user: localStorage.getItem('fastfoodtoken'),
-      }
-    });
+    this.props.history.push('/checkout');
   }
   render(){
     return (

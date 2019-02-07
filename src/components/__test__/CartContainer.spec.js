@@ -2,7 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import CartContainer from '../CartContainer';
 
-
 describe('CartContainer Component', () => {
   let wrapper;
   const items = [{

@@ -1,15 +1,15 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import HomePage from '../HomePage';
+import { HomePage }from '../HomePage';
 
 describe('HomePage Component', () => {
   let wrapper;
-  beforeAll(() => {
-    wrapper = shallow(<HomePage />);
-  });
+  const prop = {
+    getMenu: jest.fn(),
+  }
 
-  it('should render HomePage', () => {
-    shallow(<HomePage />);
+  beforeAll(() => {
+    wrapper = shallow(<HomePage {...prop} />);
   });
 
   it('should find div', () => {

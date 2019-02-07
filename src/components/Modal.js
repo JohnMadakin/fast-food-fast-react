@@ -31,10 +31,12 @@ class Modal extends React.Component{
                       <label className="login-message" style={{display: this.props.errorMessage ? 'block' : 'none'}}> {this.props.errorMessage}</label>
                       <label htmlFor="uname"><b>Username</b></label>
                       <input id="uname" type="text" onChange={this.getUsername} placeholder="Enter Username" name="uname" required/>
-                
                       <label  htmlFor="psw"><b>Password</b></label>
                       <input id="psw" type="password" onChange={this.getPassword} placeholder="Enter Password" name="psw" required/>
+                      {this.props.isLoading ? <div className="spinner"></div> : null}
+
                       <div className="login-submit-cancel-btn">
+
                       <button className="submit" type="submit" onClick={(e)=>{this.props.signin(e, this.state.username, this.state.password)}}>Login</button>
                       <button type="button" onClick={this.props.closeModal} className="cancelbtn">Cancel</button>
                       </div>

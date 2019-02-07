@@ -1,66 +1,67 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withToastManager } from 'react-toast-notifications';
+
 import Order from '../../components/Order'
-import history from '../../history';
+import getUserOrders from '../../actions/getUserOrder';
 
 
-class User extends React.Component {
+export class User extends React.Component {
   state = {
     orders: {},
     loading: true,
     displayPending: false,
     displayConfirm: false,
+    displayDashboard: true,
   }
   componentDidMount(){
-    const { user } = this.props;
+    const { user , getUserOrders} = this.props;
     if(!user ){
-      return history.push('/');
+      return this.props.history.push('/');
     }
-    const url = `https://edafe-fast-food-fast.herokuapp.com/api/v1/users/${user.user.id}/orders`;
-    axios(
-      {
-      url,
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth": user.token,
-      },
-    })
-    .then(res => {
-      this.setState({
-        orders: res.data,
-        loading: false,
-      })
-    })
-    .catch((error)=>{
-      console.log('error => ',error.response)
-    });
-
-  }
+    getUserOrders(user);
+   }
   handleSideNav = (tab) =>{
     if(tab === 'pending'){
       return this.setState({
         displayPending: true,
+        displayConfirm: false,
+      displayDashboard: false,
+
       });
     }
     return this.setState({
       displayConfirm: true,
+      displayPending: false,
+      displayDashboard: false,
+
     });
 
   }
 
-  render(){
+  render(){ 
+    let user = "";
+    if(this.props.user){
+      user = this.props.user.user.firstname;
+    }
     return (
       <div>
         <div className="admin-content">
           <div className="content-nav">
             <p className="admin-nav-orders" id="pending-nav" data-nav="pending" onClick={()=> this.handleSideNav('pending')}>Pending Orders</p>
             <p className="admin-nav-orders" id="confirm-nav" data-nav="confirm" onClick={()=> this.handleSideNav('confirm')}>Delivered Orders</p>
-            <div className="admin-content-food" id="confirm">
-            </div>
           </div>
+          <div className="admin-content-food" id="confirm" style={{display: this.state.displayConfirm ? 'block' : 'none'}}>
+            <h2 className="dahboard-message">Hello {user}, Sorry, You have no confirmed Orders</h2>
+            </div>
+            <div className="admin-content-food" id="dashboard" style={{display: this.state.displayDashboard ? 'block' : 'none'}}>
+              <h2 className="dahboard-message">Hello <span className="dashboard-name">{user}</span>, Welcome to your Dashboard</h2>
+            </div>
+
           <div className="admin-content-food" id="pending" style={{display: this.state.displayPending ? 'block' : 'none'}}>
-              {!this.state.loading ? <Order orders={this.state.orders} /> : null}
+          {this.props.isGettingOrder ? <div className="spinner"></div> : null}           
+              {this.props.getOrderSuccess ? <Order orders={this.props.orders} /> : null}
             </div>
           </div>
       </div>
@@ -68,4 +69,18 @@ class User extends React.Component {
   }
 }
 
-export default User;
+export const mapStateToProps = state => ({
+  ...state.getUserOrdersReducer,
+});
+
+export const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    ...getUserOrders,
+  },
+  dispatch
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withToastManager(User));
