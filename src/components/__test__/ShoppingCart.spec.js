@@ -8,7 +8,10 @@ describe('ShoppingCart Component', () => {
   let index = 0;
   let checkOut = jest.fn();
   const props = {
-    closeCart: jest.fn()
+    closeCart: jest.fn(),
+    history: {
+      push: jest.fn(),
+    }
   }
   const e = {
     target: {

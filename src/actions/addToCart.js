@@ -20,7 +20,6 @@ export const cartNumberSuccess = (payload) => ({
 export const addToCart = () => (dispatch) => {
     return dispatch(addToCartSuccess());
 };
-
 export const getCartNumber = () => (dispatch) => {
   const result = JSON.parse(localStorage.getItem('usercart') || "[]").length;
   return dispatch(cartNumberSuccess(result));

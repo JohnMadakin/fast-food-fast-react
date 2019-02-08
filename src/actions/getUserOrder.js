@@ -38,7 +38,6 @@ export const getUserOrdersFailure = error => ({
  */
 export const getUserOrders = (user) => (dispatch) => {
   dispatch(getUserOrdersStart());
-
   const url = `https://edafe-fast-food-fast.herokuapp.com/api/v1/users/${user.user.id}/orders`;
   axios(
     {

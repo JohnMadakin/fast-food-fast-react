@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Header from '../Header';
+import {
+  Header
+} from '../Header';
 
 describe('Header Component', () => {
   let wrapper;
@@ -8,6 +10,8 @@ describe('Header Component', () => {
     user: {
       token: 'nsnlds0894w',
     },
+    getCartNumber: jest.fn(),
+    signinUser: jest.fn(),
 
   }
   const e = {

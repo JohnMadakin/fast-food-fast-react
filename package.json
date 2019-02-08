@@ -7,14 +7,17 @@
     "start:dev": " webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "postinstall": "npm run build",
-    "start": "npm build && node server.js",
+    "serve": "node server.js",
+    "start": "npm run serve",
     "test": "jest --coverage",
-    "test:watch": "jest --watch",
-    "coverage": "npm test && cat ./coverage/lcov.info"
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "11.1.0"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.4",
@@ -46,6 +49,7 @@
     "jest": "^24.0.0",
     "moxios": "^0.4.0",
     "redux-devtools-extension": "^2.13.7",
+    "redux-mock-store": "^1.5.3",
     "style-loader": "^0.23.1",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",

@@ -9,16 +9,10 @@ import menuActionCreators from '../../actions/getMenu';
 import * as addToCart from '../../actions/addToCart';
 
 
-class HomePage extends React.Component {
+export class HomePage extends React.Component {
   state = {
     cart: [],
-    alreadyAdded: false,
   }
-  closePopUp = () => {
-    this.setState({
-       alreadyAdded: false,
-     });
-   }
    
    componentDidMount(){
     this.props.getMenu();
@@ -77,7 +71,6 @@ class HomePage extends React.Component {
             <div className="tab-content-container">
                   {this.props.isGettingAllMenu ? <div className="spinner"></div> : null}           
                 <Products alreadyAdded={this.state.alreadyAdded}
-                  closePopUp={this.closePopUp}
                   menu={this.props.menu}
                   handleClick={this.handleClick}
                   buttonText={this.state.buttonText}

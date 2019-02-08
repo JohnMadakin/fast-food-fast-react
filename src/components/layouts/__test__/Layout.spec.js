@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Layout from '../Layout';
+import {
+  Layout
+} from '../Layout';
 
 describe('Layout Component', () => {
   const props = {
@@ -11,11 +13,8 @@ describe('Layout Component', () => {
     wrapper = shallow(<Layout {...props}/>);
   });
 
-  it('should render Button', () => {
-    shallow(<Layout {...props} />);
-  });
 
-  it('should find button', () => {
+  it('should find Fragment', () => {
     const frag = wrapper.find('Fragment');
     expect(frag.length).toEqual(1);
   });

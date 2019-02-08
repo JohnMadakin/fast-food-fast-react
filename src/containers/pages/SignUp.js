@@ -8,13 +8,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withToastManager } from 'react-toast-notifications';
 
-
-
-
 import Input from '../../components/Input';
 
 
-class SignUp extends Component {
+export class SignUp extends Component {
   state = {
     validated: true,
     errorMessage: '',
