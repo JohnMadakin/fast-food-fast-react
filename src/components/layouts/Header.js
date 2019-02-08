@@ -20,7 +20,7 @@ import signinUser from '../../actions/authActions';
 import '../../styles/style.css';
 
 
-class Header extends React.Component {
+export class Header extends React.Component {
   state = {
     loginPanel: false,
     errorMessage: null,
@@ -124,7 +124,7 @@ class Header extends React.Component {
             <Link to="/" className="homepage">
               <p className="logo">fast<span className="logo-icon"><img alt="fast-food-fast-logo" src={logo} height="32px" width="32px"/></span><span className="logo_sub">food</span> <span className="logo_sub_2">fast</span></p>
             </Link></div>
-    <div className="cart" onClick={this.showCart}><span data-badge={this.state.numberOfItems} className="items-number">{this.props.numberOfCartItems > 0 ? '+': '-'}</span><img src={cart} alt="cart" height="24px" width="24px"/>{ isCartEmpty ? <span>Empty Cart</span> : <span>Cart</span>}</div>
+    <div className="cart" onClick={this.showCart}><span data-badge={this.state.numberOfItems} className="items-number">{this.props.numberOfCartItems > 0 ? '🍔': null}</span><img src={cart} alt="cart" height="24px" width="24px"/>{ isCartEmpty ? <span >Empty Cart</span> : <span className="cart-text">Items in Cart</span>}</div>
             <div className="menu"><img src="../../../src/assets/images/menu1.png" alt="menu" height="32px" width="32px" onClick={this.openMenu}/> </div>
             <nav className={this.state.mobileView ? 'nav open' : 'nav'}>
     <div className="login nav__item"><p className="login-modal">{!!this.props.user || this.state.loggedOut || this.props.signupSuccess ? <span className="header-login" onClick={this.handleLogoutModal}>Logout</span> : <span className="header-logout" onClick={this.handleLoginModal}>Login</span>}</p></div>

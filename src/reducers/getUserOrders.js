@@ -6,6 +6,7 @@ export const initialState = {
   getOrderSuccess: null,
   orders: {},
   errorMessage: null,
+  errorOccured: null,
 };
 
 const getUserOrdersSuccess = (state, action )=> {
@@ -19,7 +20,7 @@ const getUserOrdersSuccess = (state, action )=> {
 }
 const gettingOrders = state => updateObject(
   state, {
-    isgettingOrder: true,
+    isGettingOrder: true,
   },
 );
 

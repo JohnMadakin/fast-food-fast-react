@@ -7,7 +7,7 @@ import Order from '../../components/Order'
 import getUserOrders from '../../actions/getUserOrder';
 
 
-class User extends React.Component {
+export class User extends React.Component {
   state = {
     orders: {},
     loading: true,

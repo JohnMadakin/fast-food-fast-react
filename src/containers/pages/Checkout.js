@@ -11,12 +11,11 @@ import postOrders from '../../actions/postOrders';
 
 
 
-class Checkout extends React.Component{
+export class Checkout extends React.Component{
   state = {
     deliveryAddress: '',
     postedOrder: false,
     order: [],
-    closePopUp: false,
 
   }
 
@@ -51,7 +50,9 @@ class Checkout extends React.Component{
         appearance: 'success',
         autoDismiss: true,
       });
-      localStorage.clear('userorder');
+      setTimeout(()=>{
+        window.location.replace('/user');
+      }, 3000)
       return true;
     }
 
@@ -60,14 +61,7 @@ class Checkout extends React.Component{
 
   placeOrder = () => {
     const orders = [...this.state.order];
-    this.props.postOrder(this.props.user.token, orders, this.state.deliveryAddress);
-
-  }
-
-  closePopUp = () => {
-   this.setState({
-      postOrder: false,
-    });
+    return this.props.postOrder(this.props.user.token, orders, this.state.deliveryAddress);
   }
 
 
@@ -100,8 +94,6 @@ class Checkout extends React.Component{
           </div>
         </div>
       </div>
-     
-      <h3 className="error-message"></h3>
     </main>
   
   

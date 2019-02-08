@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Products from './Products';
+import {Products} from './Products';
 
 describe('Products Component', () => {
   let wrapper;
@@ -14,29 +14,35 @@ describe('Products Component', () => {
     imageUrl: 'http://cloud.com/saf',
     title: 'Rice',
   }];
+  const props = {
+    handleClick: jest.fn(),
+    menu: [
+      {
+        id: 1,
+      },
+      {
+        id: 2,
+      },
+
+    ]
+  }
 
 
   beforeEach(() => {
-    wrapper = shallow(<Products/>);
+    wrapper = shallow(<Products {...props} />);
   });
 
-  it('should render Popup', () => {
+  it('should render products', () => {
     const items = JSON.stringify([{
       itemPrice: 200,
       quantity: 2,
     }]);
     window.localStorage.setItem('usercart', items);
-    shallow(<Products/>);
+    shallow(<Products {...props }/>);
   });
 
   it('should find div', () => {
     const div = wrapper.find('div');
     expect(div.length).toEqual(1);
-  });
-  it('should call handleClick', () => {
-    wrapper.instance().handleClick(items);
-  });
-  it('should call closePopUp', () => {
-    wrapper.instance().closePopUp();
   });
 });

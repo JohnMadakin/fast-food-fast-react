@@ -6,7 +6,7 @@ import {withRouter} from 'react-router'
 import Header from './Header';
 
 
-const Layout = (props) => {
+export const Layout = (props) => {
   return (
     <Fragment>
       <Header history={props.history} user={props.user} />

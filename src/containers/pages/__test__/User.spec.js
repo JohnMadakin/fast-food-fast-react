@@ -1,11 +1,15 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import User from '../User';
+import { User} from '../User';
 
 describe('User Component', () => {
   let wrapper;
   const props = {
-    closeCart: jest.fn()
+    closeCart: jest.fn(),
+    history: {
+      push: jest.fn(),
+    }
+
   }
   const e = {
     target: {
@@ -24,7 +28,7 @@ describe('User Component', () => {
 
   it('should find div', () => {
     const div = wrapper.find('div');
-    expect(div.length).toEqual(5);
+    expect(div.length).toEqual(6);
   });
   it('should find p', () => {
     const p = wrapper.find('p');

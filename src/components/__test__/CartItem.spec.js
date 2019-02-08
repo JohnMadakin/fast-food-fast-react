@@ -2,7 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import Cartitem from '../CartItem';
 
-
 describe('Cartitem Component', () => {
   let wrapper;
   let changeQuantity = jest.fn();

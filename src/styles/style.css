@@ -794,8 +794,14 @@ textarea:focus{
   display:flex;
   flex-wrap: wrap;
   padding: 1.0rem 0rem;
-  width: 50%;
+  width: 100%;
+  justify-content: space-between;
   /* justify-content: flex-end; */
+}
+.item-footer-checkout{
+  width: 15em;
+  padding: 1.0rem 0rem;
+
 }
 .item-qty{
   font-size: 1.3rem;
@@ -881,7 +887,7 @@ textarea:focus{
   background-image: url('../assets/images/delete.png');
   background-repeat: no-repeat;
   background-position: center;
-  margin-left: 19rem;
+  margin-left: 11rem;
   cursor: pointer;
  }
  #dashboard{
@@ -914,11 +920,13 @@ textarea:focus{
 [data-badge=""]:after {
   display: none;
 }
+.cart-text{
+  font-weight: bold;
+}
  .items-number{
    width: 20px;
    height: 20px;
-   border-radius: 50%;
-   background-color: orange;
+   background-color: transparent;
    color: #fff;
    text-align: center;
    padding: 0 auto;
@@ -950,6 +958,7 @@ textarea:focus{
   padding:3px 6px;
   margin: 5px 0px;
   margin-left: 15%;
+  width: 5rem;
   
 }
 .item-title{
@@ -1923,6 +1932,14 @@ textarea{
   .cancel-btn{
     margin-left: 50%;
   }
+  .shopping-cart-card {
+    min-height: 50px;
+    left: 40%;
+    top: 8%;
+    width: 60%;
+}
+.quantity{
+  width: 5rem;}
 
 }
 
@@ -1930,6 +1947,12 @@ textarea{
   .divider, .userProfileContainer{
     display: none;
   }
+  .quantity{
+    width: 3rem;
+  }
+  
+  
+  
   .logo{
     font-size: 1.4rem;
   }

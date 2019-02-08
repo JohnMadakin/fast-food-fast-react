@@ -63,8 +63,10 @@ export const postOrder = (token, orders, address) => (dispatch) => {
   })
   .then((response)=>{
     dispatch(postOrderSuccess(response.data));
-    localStorage.clear('usercart');
-    localStorage.clear('userorder');
+    localStorage.setItem('usercart', "[]");
+    localStorage.setItem('userorder', "[]");
+    localStorage.setItem('fastfoodtoken', token);
+
   })
   .catch((error)=>{
     dispatch(postOrderFailure(error.response));

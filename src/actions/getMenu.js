@@ -43,7 +43,7 @@ export const getMenu = () => (dispatch) => {
     dispatch(getMenuSuccess(res.data));
   })
   .catch((error)=>{
-    dispatch(getMenuFailure(err.reponse));
+    dispatch(getMenuFailure(error.reponse));
   });
 };
 

@@ -50,10 +50,8 @@ export const signinUser = (userData) => async (dispatch) => {
 
     })
     .then((response)=>{
-      if(response.status === 200){
-        localStorage.setItem('fastfoodtoken',response.data.token);
-        dispatch(signinSuccess(response.data));
-      }
+      localStorage.setItem('fastfoodtoken',response.data.token);
+      dispatch(signinSuccess(response.data));
     })
     .catch((error) => {
       dispatch(signinFailure(error));
