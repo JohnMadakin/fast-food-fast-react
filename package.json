@@ -7,10 +7,10 @@
     "start:dev": " webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "postinstall": "npm run build",
-    "start": "npm build && node server.js",
+    "start": "npm run build && node server.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "coverage": "npm test && cat ./coverage/lcov.info"
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +41,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "coveralls": "^3.0.2",
     "css-loader": "^1.0.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",

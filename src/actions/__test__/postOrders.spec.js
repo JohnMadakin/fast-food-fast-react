@@ -2,13 +2,11 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-const dispatchFn = jest.fn();
 
 import {
   postOrder,
   postOrderFailure,
-  postOrderStart,
-} from '../postorders';
+} from '../postOrders';
 import * as actionTypes from '../actionTypes';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
