@@ -100,6 +100,7 @@ export const signUpUser = (user, history) => async (dispatch) => {
       numberOfItems < 1 ? history.push('/') : history.push('/checkout')
     })
     .catch((err) => {
+      console.log('--->', err.response)
       dispatch(signUpFailure(err));
     });
 };

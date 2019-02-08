@@ -33,7 +33,7 @@ export class Checkout extends React.Component{
       return window.location.replace('/signup');
     }
     this.setState({
-      order: [...JSON.parse(localStorage.getItem('userorder') || '[]')],
+      order: [...JSON.parse(localStorage.getItem('userorder') || localStorage.getItem('usercart') || '[]')],
     });
   }
 
